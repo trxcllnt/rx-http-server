@@ -1,16 +1,16 @@
 {
-    "name": "rx-http-server",
-    "version": "0.1.1",
-    "description": "An Rx based http server wrapper",
-    "author": "Joseph Moniz <joseph.moniz@gmail.com>",
-    "main": "./src/index.js",
-    "scripts": {
-        "test": "./node_modules/.bin/mocha --recursive"
-    },
-    "dependencies": {
-        "rx": "2.*.*"
-    },
-    "devDependencies": {
-        "mocha": "1.9.0"
-    }
+  "name": "rx-http-server",
+  "version": "0.1.1",
+  "description": "An Rx based http server wrapper",
+  "author": "Joseph Moniz <joseph.moniz@gmail.com>",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --recursive ./test"
+  },
+  "devDependencies": {
+    "mocha": "1.9.0"
+  },
+  "dependencies": {
+    "rxjs": ">=5.0.0-beta.8"
+  }
 }

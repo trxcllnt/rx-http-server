@@ -1,38 +1,38 @@
-var Rx   = require("rx");
+var Rx   = require("rxjs");
 var http = require("http");
 var util = require("util");
 
 function Server() {
     http.Server.call(this);
 
-    this.requests = Rx.Node
-        .fromEvent(this, "request", function(args) {
-            return { request: args[0], response: args[1] };
+    this.requests = Rx.Observable
+        .fromEvent(this, "request", function(request, response) {
+            return { request: request, response: response };
         });
 
-    this.closes = Rx.Node
-        .fromEvent(this, "close", function(args) {
+    this.closes = Rx.Observable
+        .fromEvent(this, "close", function() {
             return true;
         });
 
-    this.checkContinues = Rx.Node
-        .fromEvent(this, "checkContinue", function(args) {
-            return { request: args[0], response: args[1] };
+    this.checkContinues = Rx.Observable
+        .fromEvent(this, "checkContinue", function(request, response) {
+            return { request: request, response: response };
         });
 
-    this.connects = Rx.Node
-        .fromEvent(this, "connect", function(args) {
-            return { request: args[0], socket: args[1], head: args[2] };
+    this.connects = Rx.Observable
+        .fromEvent(this, "connect", function(request, socket, head) {
+            return { request: request, socket: socket, head: head };
         });
 
-    this.upgrades = Rx.Node
-        .fromEvent(this, "upgrade", function(args) {
-            return { request: args[0], socket: args[1], head: args[2] };
+    this.upgrades = Rx.Observable
+        .fromEvent(this, "upgrade", function(request, socket, head) {
+            return { request: request, socket: socket, head: head };
         });
 
-    this.clientErrors = Rx.Node
-        .fromEvent(this, "clientError", function(args) {
-            return { exception: args[0], socket: args[1] };
+    this.clientErrors = Rx.Observable
+        .fromEvent(this, "clientError", function(exception, socket) {
+            return { exception: exception, socket: socket };
         });
 }
 
